@@ -28,7 +28,8 @@ const navigate= useNavigate()
               key={id}
               className=" col-sm-12 col-md-6 col-lg-4"
               type="button"
-              onClick= {() => navigate(`/people/${id}`)}
+              // onClick= {() => navigate(`/people/${id}`)}
+              onClick= {() => navigate(`${id}`, {state:person})}
             >
               <img className="rounded" src={avatar} alt="img" />
               <h6>
