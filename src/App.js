@@ -11,6 +11,7 @@ import FullStack from "./pages/Fullstack";
 import Aws from "./pages/Aws";
 import ReactJS from "./pages/ReactJS";
 import PrivateRouter from "./pages/PrivateRouter";
+import Login from "./pages/Login";
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           <Route path="" element={<Contact />} />
         </Route>
 
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
