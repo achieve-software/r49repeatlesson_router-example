@@ -4,7 +4,7 @@ import {useLocation, useParams} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import React, { useEffect, useState } from "react";
 import NotFound from "./NotFound";
-import { Spinner } from "react-bootstrap";
+import spinner from "../img/Spinner-2.gif"
 const PersonDetail = () => {
 
 
@@ -42,7 +42,7 @@ const PersonDetail = () => {
       } else if (loading) {
         return (
           <div className="text-center" >
-          <img src={Spinner} alt="spinner" />
+            <img src={spinner} alt="spinner" />
           </div>
         );
       }
