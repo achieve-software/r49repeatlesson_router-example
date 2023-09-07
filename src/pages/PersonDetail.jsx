@@ -3,6 +3,8 @@
 import {useLocation, useParams} from "react-router-dom"
 import {useNavigate} from "react-router-dom"
 import React, { useEffect, useState } from "react";
+import NotFound from "./NotFound";
+import { Spinner } from "react-bootstrap";
 const PersonDetail = () => {
 
 
@@ -11,20 +13,40 @@ const PersonDetail = () => {
     const {id}= useParams()
     const [person, setPerson] = useState({});
     const navigate= useNavigate()
-        
-
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
   
     
       const getPerson = () => {
         fetch(`https://reqres.in/api/users/${id}`)
-          .then((res) => res.json())
-          .then((data) => setPerson(data.data))
-          .catch((err) => console.log(err));
-      };
+        .then((res) => {
+          if (!res.ok) {
+            setError(true);
+            setLoading(false);
+            new Error("user can not be found"); // console.log(res);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setLoading(false);
+          setPerson(data.data);
+        })
+        .catch((err) => console.log(err));
+    };
       useEffect(() => {
         getPerson();
       }, []);
 
+      if (error) {
+        return <NotFound />;
+      } else if (loading) {
+        return (
+          <div className="text-center" >
+          <img src={Spinner} alt="spinner" />
+          </div>
+        );
+      }
+else{
     return (
         <div>
           <div className="container text-center">
@@ -47,6 +69,10 @@ const PersonDetail = () => {
           </div>
         </div>
       );
+}
+
+
+    
 }
 
 export default PersonDetail
